@@ -18,7 +18,6 @@ namespace STG
             TitleScene scene = new TitleScene();
 
             asd.Engine.ChangeSceneWithTransition(scene, new asd.TransitionFade(0, 1.0f));
-            
 
             
             // Altseedのウインドウが閉じられていないか確認する。

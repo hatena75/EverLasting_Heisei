@@ -16,6 +16,9 @@ namespace STG
         //ボムを発動したときの効果音
         private asd.SoundSource bombSound;
 
+        private asd.Vector2DF moveVelocity;
+
+
 
         public override void OnCollide(CollidableObject obj)
         {
@@ -72,22 +75,22 @@ namespace STG
             // マウスカーソルの座標を取得。
             asd.Vector2DF posp = asd.Engine.Mouse.Position;
 
-            //マウスカーソルの座標の角度（度）を計算。
-            double rad = Math.Atan2(posp.Y - Position.Y, posp.X - Position.X);
+            //マウスカーソルの向きへの単位ベクトルを取得
+            moveVelocity = (posp - Position).Normal;
 
-            double rad2 = rad * 180 / Math.PI;
+            //マウスの座標に向けて移動させる(ifはぶるぶる防止)
+            if((posp - Position).Length > 5.0f)
+            {
+                Position += moveVelocity * 5;
+            }
 
-            //プレイヤーの向きをマウスカーソルの向きに変える
-            Angle = (float)rad2;
-
-            //マウスの左ボタンを押している間弾が発射される
-            if (count % 2 == 0)
+            if (count % 4 == 0)
             {
                 asd.Vector2DF dir = posp - Position;
 
-                asd.Vector2DF moveVelocity = dir.Normal * 10.0f;
+                asd.Vector2DF moveVelocity = dir.Normal * 8.0f;
 
-                asd.Engine.AddObject2D(new Bullet(Position, moveVelocity));
+                asd.Engine.AddObject2D(new Bullet(Position));
                 
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);
