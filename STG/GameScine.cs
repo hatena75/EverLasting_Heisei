@@ -79,6 +79,8 @@ namespace STG
             if (count == 10)
             {
                 playingBgmId = asd.Engine.Sound.Play(bgm);
+                asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), player));
+                asd.Engine.AddObject2D(new Option(new asd.Vector2DF(-40.0f, 0.0f), player));
             }
 
             //敵が湧く処理
@@ -87,19 +89,19 @@ namespace STG
                 if (count % 50 == 0)
                 {
                     randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy2(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                     randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy2(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                     randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy2(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                     randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy2(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                     randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy2(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                 }
 

@@ -86,11 +86,7 @@ namespace STG
 
             if (count % 4 == 0)
             {
-                asd.Vector2DF dir = posp - Position;
-
-                asd.Vector2DF moveVelocity = dir.Normal * 8.0f;
-
-                asd.Engine.AddObject2D(new Bullet(Position));
+                asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f,-15.0f) ));
                 
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);
