@@ -16,6 +16,8 @@ namespace STG
 
         int count = 0;
 
+        asd.TextObject2D obj;
+
         //BGM
         asd.SoundSource bgm;
 
@@ -31,17 +33,40 @@ namespace STG
         protected override void OnRegistered()
         {
             gameLayer = new asd.Layer2D();
+            AddLayer(gameLayer);
 
             asd.Layer2D backgroundLayer = new asd.Layer2D();
-
             backgroundLayer.DrawingPriority = -10;
-            
-            AddLayer(gameLayer);
             AddLayer(backgroundLayer);
+
+            asd.Layer2D layertext = new asd.Layer2D();
+            layertext.DrawingPriority = +10;
+            AddLayer(layertext);
 
             Background bg = new Background(new asd.Vector2DF(0.0f, 0.0f), "Resources/Bg.png");
 
             backgroundLayer.AddObject(bg);
+
+            // フォントを生成する。
+            var font = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 255, 255, 255), 1, new asd.Color(255, 255, 255, 255));
+
+            // 文字描画オブジェクトを生成する。
+            obj = new asd.TextObject2D();
+
+            // 描画に使うフォントを設定する。
+            obj.Font = font;
+
+            // 描画位置を指定する。
+            obj.Position = new asd.Vector2DF(0.0f, 0.0f);
+
+            Singleton.Getsingleton();
+            // 描画する文字列を指定する。
+            obj.Text = "平成" + Player.year + "年";
+
+            //obj.Scale = new asd.Vector2DF(0.7f, 0.7f);
+
+            // 文字描画オブジェクトのインスタンスをエンジンへ追加する。
+            layertext.AddObject(obj);
 
             player = new Player();
 
@@ -86,7 +111,7 @@ namespace STG
             //敵が湧く処理
             if (count > 50)
             {
-                if (count % 50 == 0)
+                if (count % 30 == 0)
                 {
                     randomNumber1 = rnd.Next(0, 640);
                     asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
@@ -109,6 +134,9 @@ namespace STG
 
             }
 
+            //平成の表示を更新
+            obj.Text = "平成" + Player.year + "年";
+            
             count++;
         }
     }

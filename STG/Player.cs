@@ -18,7 +18,7 @@ namespace STG
 
         private asd.Vector2DF moveVelocity;
 
-
+        public static int year = 0;
 
         public override void OnCollide(CollidableObject obj)
         {
@@ -121,6 +121,12 @@ namespace STG
             Position = position;
 
             count++;
+
+            if (count % 300 == 0)
+            {
+                year++;
+            }
+
         }
     }
 }

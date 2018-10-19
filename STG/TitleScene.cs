@@ -24,7 +24,7 @@ namespace STG
 
         protected override void OnUpdated()
         {
-            if(asd.Engine.Keyboard.GetKeyState(asd.Keys.Z) == asd.KeyState.Push && isTitleChanging == false)
+            if(asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push && isTitleChanging == false)
             {
                 asd.Engine.ChangeSceneWithTransition(new GameScine(), new asd.TransitionFade(1.0f, 1.0f));
 
