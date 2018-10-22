@@ -18,6 +18,9 @@ namespace STG
 
         asd.TextObject2D obj;
 
+        asd.TextObject2D obj2;
+
+
         //BGM
         asd.SoundSource bgm;
 
@@ -63,10 +66,27 @@ namespace STG
             // 描画する文字列を指定する。
             obj.Text = "平成" + Player.year + "年";
 
+
+
+            // フォントを生成する。
+            var font2 = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 0, 0, 255), 0, new asd.Color(255, 0, 0, 255));
+
+            // 文字描画オブジェクトを生成する。
+            obj2 = new asd.TextObject2D();
+
+            // 描画に使うフォントを設定する。
+            obj2.Font = font2;
+
+            // 描画位置を指定する。
+            obj2.Position = new asd.Vector2DF(130.0f, 0.0f);
+
+            Singleton.Getsingleton();
+
             //obj.Scale = new asd.Vector2DF(0.7f, 0.7f);
 
             // 文字描画オブジェクトのインスタンスをエンジンへ追加する。
             layertext.AddObject(obj);
+            layertext.AddObject(obj2);
 
             player = new Player();
 
@@ -129,9 +149,12 @@ namespace STG
                     asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                 }
+            }
 
-
-
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push)
+            {
+                // 描画する文字列を指定する。
+                obj2.Text = "リタイア宣言中";
             }
 
             //平成の表示を更新

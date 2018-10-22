@@ -8,6 +8,8 @@ namespace STG
 {
     class GameOverScene : asd.Scene
     {
+        asd.TextObject2D obj;
+
         protected override void OnRegistered()
         {
             asd.Layer2D layerpict = new asd.Layer2D();
@@ -26,7 +28,7 @@ namespace STG
             var font = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 255, 255, 255), 1, new asd.Color(255, 255, 255, 255));
 
             // 文字描画オブジェクトを生成する。
-            var obj = new asd.TextObject2D();
+            obj = new asd.TextObject2D();
 
             // 描画に使うフォントを設定する。
             obj.Font = font;
@@ -35,8 +37,16 @@ namespace STG
             obj.Position = new asd.Vector2DF(130, 240);
 
             Singleton.Getsingleton();
+
             // 描画する文字列を指定する。
-            obj.Text = "平成" +Player.year + "年で改号された・・・";
+            if (Player.retire_flg == true)
+            {
+                obj.Text = "平成は" + Player.year + "年の歴史に幕を閉じた";
+            }
+            else
+            {
+                obj.Text = "平成は時空の歪みに消えた・・・";
+            }
 
             // 文字描画オブジェクトのインスタンスをエンジンへ追加する。
             layertext.AddObject(obj);
@@ -48,7 +58,8 @@ namespace STG
 
         protected override void OnUpdated()
         {
-            if(asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push && isOverChanging == false)
+
+            if (asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push && isOverChanging == false)
             {
                 asd.Engine.ChangeSceneWithTransition(new GameScine(), new asd.TransitionFade(1.0f, 1.0f));
 
@@ -59,6 +70,7 @@ namespace STG
                 Singleton.singleton.itemcount = 0;
                 Singleton.singleton.bomblimit = 1;
                 Player.year = 0;
+                Player.retire_flg = false;
             }
         }
         

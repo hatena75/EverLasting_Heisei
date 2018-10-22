@@ -9,6 +9,7 @@ namespace STG
     public class Player : CollidableObject
     {
         int count = 0;
+        int retire_count = int.MaxValue;
         
         //ショットの効果音
         private asd.SoundSource shotSound;
@@ -19,6 +20,8 @@ namespace STG
         private asd.Vector2DF moveVelocity;
 
         public static int year = 0;
+
+        public static bool retire_flg = false;
 
         public override void OnCollide(CollidableObject obj)
         {
@@ -42,8 +45,6 @@ namespace STG
             }
         }
 
-
-
         public Player()
         {
             Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Player.png");
@@ -60,11 +61,6 @@ namespace STG
 
             //ボム発動の効果音を読み込む
             bombSound = asd.Engine.Sound.CreateSoundSource("Resources/Bomb.wav", true);
-        }
-
-        public enum playershot
-        {
-            PenetrateShot,TwoShot,ThreeShot,TriShot
         }
         
         protected override void OnUpdate()
@@ -113,6 +109,11 @@ namespace STG
                 }
             }
 
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push && retire_count == int.MaxValue)
+            {
+                retire_count = count;
+            }
+
             asd.Vector2DF position = Position;
 
             position.X = asd.MathHelper.Clamp(position.X, asd.Engine.WindowSize.X - Texture.Size.X / 2.0f, Texture.Size.X / 2.0f);
@@ -122,7 +123,13 @@ namespace STG
 
             count++;
 
-            if (count % 300 == 0)
+            if (retire_count + 600 == count && IsAlive == true)
+            {
+                retire_flg = true;
+                Dispose();
+            }
+
+            if (count % 300 == 0 && IsAlive == true) //生きているなら5秒で1年経つ
             {
                 year++;
             }
