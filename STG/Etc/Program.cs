@@ -13,7 +13,7 @@ namespace STG
 		static void Main(string[] args)
 		{
 			// Altseedを初期化する。
-			asd.Engine.Initialize("平成よ永遠に", 640, 480, new asd.EngineOption());
+			asd.Engine.Initialize("Ever Lasting HEISEI ～平成よ永遠に～", 480, 640, new asd.EngineOption()); //3:4
 
             TitleScene scene = new TitleScene();
 

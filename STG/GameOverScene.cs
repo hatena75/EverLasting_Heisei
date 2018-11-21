@@ -34,18 +34,18 @@ namespace STG
             obj.Font = font;
 
             // 描画位置を指定する。
-            obj.Position = new asd.Vector2DF(130, 240);
+            obj.Position = new asd.Vector2DF(70, 240);
 
             Singleton.Getsingleton();
 
             // 描画する文字列を指定する。
             if (Player.retire_flg == true)
             {
-                obj.Text = "平成は" + Player.year + "年の歴史に幕を閉じた";
+                obj.Text = "平成は" + Player.year + "年で改号された";
             }
             else
             {
-                obj.Text = "平成は時空の歪みに消えた・・・";
+                obj.Text = "";
             }
 
             // 文字描画オブジェクトのインスタンスをエンジンへ追加する。

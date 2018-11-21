@@ -15,7 +15,7 @@ namespace STG
             AddLayer(layer);
 
             asd.TextureObject2D background = new asd.TextureObject2D();
-            background.Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Title2.png");
+            background.Texture = asd.Engine.Graphics.CreateTexture2D("Resources/title.png");
 
             layer.AddObject(background);
         }
