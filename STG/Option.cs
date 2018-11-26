@@ -68,9 +68,9 @@ namespace STG
             //線形補間の原理でもっさりとプレイヤーについていく
             Position += ((player.Position + pos) - Position) * 0.3f;
 
-            if (count % 8 == 0)
+            if (count % 16 == 0)
             {
-                asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f, -15.0f) ));
+                asd.Engine.AddObject2D(new SplitBullet(Position + new asd.Vector2DF(0.0f, -15.0f) ));
 
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);

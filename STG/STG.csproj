@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Background.cs" />
     <Compile Include="Bomb.cs" />
+    <Compile Include="ChangeableBullet.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateTriShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_SpeedThreeShot.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Etc\Rand.cs" />
     <Compile Include="Enemy\RushingEnemy.cs" />
     <Compile Include="Etc\Singleton.cs" />
+    <Compile Include="SplitBullet.cs" />
     <Compile Include="TitleScene.cs" />
   </ItemGroup>
   <ItemGroup>

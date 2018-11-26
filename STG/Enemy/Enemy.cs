@@ -17,7 +17,7 @@ namespace STG
             if (obj == null)
                 return;
 
-            if(obj is Bullet)
+            if(obj is Bullet || obj is ChangeableBullet)
             {
                 CollidableObject bullet = obj;
                 
