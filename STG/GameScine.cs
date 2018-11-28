@@ -29,8 +29,8 @@ namespace STG
         
         //乱数を用意する
         static Random rnd = new Random();
-        private int randomNumber1 = rnd.Next(0, 640);
-        private int randomNumber2 = rnd.Next(0,480);
+        private int randomNumber1 = rnd.Next(0, 480);
+        private int randomNumber2 = rnd.Next(0,640);
         
 
         protected override void OnRegistered()
@@ -131,22 +131,14 @@ namespace STG
             //敵が湧く処理
             if (count > 50)
             {
-                if (count % 30 == 0)
+                if (count % 40 == 0)
                 {
-                    randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
-
-                    randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
-
-                    randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
-
-                    randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
-
-                    randomNumber1 = rnd.Next(0, 640);
-                    asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    for(int i = 0; i < (Player.year / 2) + 2; i++)
+                    {
+                        randomNumber1 = rnd.Next(0, 480);
+                        asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    }
+                    
 
                 }
             }

@@ -15,13 +15,14 @@ namespace STG
         {
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2.0f, Texture.Size.Y / 2.0f);
             moveVelocity = new asd.Vector2DF();
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Enemy2.png");
+            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Anshi.png");
+            moveVelocity = (player.Position - Position).Normal;
         }
 
         protected override void OnUpdate()
         {
 
-            moveVelocity = (player.Position - Position).Normal;
+            
 
             Position += moveVelocity * 3.0f;
 
@@ -33,7 +34,7 @@ namespace STG
             double rad2 = rad * 180 / Math.PI;
 
             //プレイヤーの向きに変える
-            Angle = (float)rad2;
+            //Angle = (float)rad2;
         }
 
         public override void OnCollide(CollidableObject obj)
