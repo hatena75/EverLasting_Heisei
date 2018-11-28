@@ -42,11 +42,9 @@ namespace STG
         }
         */
 
-
-
         public Option(asd.Vector2DF pos, Player player)
         {
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Player.png");
+            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Choco.png");
 
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2.0f, Texture.Size.Y / 2.0f);
 
@@ -68,7 +66,7 @@ namespace STG
             //線形補間の原理でもっさりとプレイヤーについていく
             Position += ((player.Position + pos) - Position) * 0.3f;
 
-            if (count % 16 == 0)
+            if (count % 48 == 0)
             {
                 asd.Engine.AddObject2D(new SplitBullet(Position + new asd.Vector2DF(0.0f, -15.0f) ));
 

@@ -31,7 +31,7 @@ namespace STG
 
             count = 0;
 
-            splitcount = 20;
+            splitcount = 35;
         }
 
         protected override void OnUpdate()
@@ -41,11 +41,11 @@ namespace STG
             if (count == splitcount)
             {
                 
-                    for (int i = 0; i < 12; ++i)
+                    for (int i = 0; i < 8; ++i)
                     {
                         asd.Vector2DF dir = new asd.Vector2DF(1, 0);
                         dir.Length = 10.0f;
-                        dir.Degree = i * 30;
+                        dir.Degree = i * 45;
                         asd.Engine.AddObject2D(new ChangeableBullet(Position, dir, "Money_fly",false));
 
                     }

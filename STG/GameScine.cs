@@ -124,7 +124,7 @@ namespace STG
             if (count == 10)
             {
                 playingBgmId = asd.Engine.Sound.Play(bgm);
-                //asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), player));
+                asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), player));
                 //asd.Engine.AddObject2D(new Option(new asd.Vector2DF(-40.0f, 0.0f), player));
             }
 
