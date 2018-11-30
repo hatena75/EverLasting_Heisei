@@ -79,6 +79,7 @@
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="GameOverScene.cs" />
     <Compile Include="GameScine.cs" />
+    <Compile Include="MovingBackground.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="PenetrateBullet.cs" />
     <Compile Include="Player.cs" />

@@ -46,9 +46,17 @@ namespace STG
             layertext.DrawingPriority = +10;
             AddLayer(layertext);
 
-            Background bg = new Background(new asd.Vector2DF(0.0f, 0.0f), "Resources/Bg.png");
+            Background bg = new Background(new asd.Vector2DF(0.0f, 0.0f), "Resources/BackGround.png");
 
             backgroundLayer.AddObject(bg);
+
+            // 動く背景を生成する。
+            MovingBackground bgMove1 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f), "Resources/haikei0.png", 10.0f);
+            MovingBackground bgMove2 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f - bgMove1.Texture.Size.Y), "Resources/haikei1.png", 10.0f);
+
+            // 動く背景を文字レイヤーに追加する。（プレイヤーなどより上に表示させたいため）
+            layertext.AddObject(bgMove1);
+            layertext.AddObject(bgMove2);
 
             // フォントを生成する。
             var font = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 255, 255, 255), 1, new asd.Color(255, 255, 255, 255));
@@ -93,7 +101,7 @@ namespace STG
             gameLayer.AddObject(player);
 
             //BGMを読み込む
-            bgm = asd.Engine.Sound.CreateSoundSource("Resources/Bgm.ogg", false);
+            bgm = asd.Engine.Sound.CreateSoundSource("Resources/m-art_TSUKINIKAZE.ogg", false);
 
             //BGMループ
             bgm.IsLoopingMode = true;
@@ -124,6 +132,7 @@ namespace STG
             if (count == 10)
             {
                 playingBgmId = asd.Engine.Sound.Play(bgm);
+                asd.Engine.Sound.SetVolume((int)playingBgmId, 0.1f);
                 asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), player));
                 //asd.Engine.AddObject2D(new Option(new asd.Vector2DF(-40.0f, 0.0f), player));
             }

@@ -82,8 +82,9 @@ namespace STG
 
             if (count % 16 == 0) //元は4
             {
-                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(0,-10), "Tower_tokyo", true));
-                
+                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(0,-25), "Tower_tokyo", true));
+                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(5,-5), "Vote", false));
+                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(-5, -5), "Vote", false));
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);
             }
