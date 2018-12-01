@@ -74,8 +74,6 @@ namespace STG
             // 描画する文字列を指定する。
             obj.Text = "平成" + Player.year + "年";
 
-
-
             // フォントを生成する。
             var font2 = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 0, 0, 255), 0, new asd.Color(255, 0, 0, 255));
 
@@ -110,7 +108,6 @@ namespace STG
             playingBgmId = null;
         }
 
-        
 
         protected override void OnUpdated()
         {           
@@ -147,8 +144,6 @@ namespace STG
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
                     }
-                    
-
                 }
             }
 
@@ -159,8 +154,15 @@ namespace STG
             }
 
             //平成の表示を更新
-            obj.Text = "平成" + Player.year + "年";
-            
+            if (Player.year == 1)
+            {
+                obj.Text = "平成元年";
+            }
+            else
+            {
+                obj.Text = "平成" + Player.year + "年";
+            }
+
             count++;
         }
     }

@@ -14,13 +14,13 @@ namespace STG
         // 時間を数えるカウンタ
         int count;
 
-        public Bomb(asd.Vector2DF position, float angle)
+        public Bomb(asd.Vector2DF position, float angle, string texture)
         {
             // 初期位置を設定
             Position = position;
 
             // 魔法陣の画像を読み込み
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Circuit.png");
+            Texture = asd.Engine.Graphics.CreateTexture2D($"Resources/Bomb_Texture/{texture}.png");
 
             // 描画原点を画像の中心に設定
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2, Texture.Size.Y / 2);
@@ -39,15 +39,17 @@ namespace STG
         {
             // 速度ベクトルの分だけ移動させる
             Position += velocity;
-
-            // 画像を回転する
-            Angle += 5;
+            
+            //くるくる回りながら拡散
+            velocity.Degree--;
+            
+            velocity.Length += 0.03f;
 
             // 時間を数える
             count++;
 
             // 120フレーム経っていたら消える
-            if (count >= 120)
+            if (count >= 150)
             {
                 Dispose();
             }

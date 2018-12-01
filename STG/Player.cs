@@ -10,6 +10,7 @@ namespace STG
     {
         int count = 0;
         int retire_count = int.MaxValue;
+        string bomb_tex;
         
         //ショットの効果音
         private asd.SoundSource shotSound;
@@ -19,7 +20,7 @@ namespace STG
 
         private asd.Vector2DF moveVelocity;
 
-        public static int year = 0;
+        public static int year = 1;
 
         public static bool retire_flg = false;
 
@@ -80,7 +81,7 @@ namespace STG
                 Position += moveVelocity * 5;
             }
 
-            if (count % 16 == 0) //元は4
+            if (count % 16 == 0) //元は
             {
                 asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(0,-25), "Tower_tokyo", true));
                 asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(5,-5), "Vote", false));
@@ -96,11 +97,38 @@ namespace STG
 
                 if (Singleton.singleton.bomblimit > 0)
                 {
-                    for (int i = 0; i < 24; i++)
+                    for (int i = 0; i < 8; i++)
                     {
                         // ボムを生成
-                        Bomb bomb = new Bomb(Position, 360 / 24 * i);
+                        switch (i)
+                        {
+                            case 0:
+                                bomb_tex = "zangiri";
+                                break;
+                            case 1:
+                                bomb_tex = "sukiyaki";
+                                break;
+                            case 2:
+                                bomb_tex = "sinbunsi";
+                                break;
+                            case 3:
+                                bomb_tex = "renga";
+                                break;
+                            case 4:
+                                bomb_tex = "randoseru";
+                                break;
+                            case 5:
+                                bomb_tex = "jouki";
+                                break;
+                            case 6:
+                                bomb_tex = "yukiti";
+                                break;
+                            case 7:
+                                bomb_tex = "gasutou";
+                                break;
+                        }
 
+                        Bomb bomb = new Bomb(Position, 360 / 8 * i, bomb_tex);
                         // ボム オブジェクトをエンジンに追加
                         asd.Engine.AddObject2D(bomb);
                     }
