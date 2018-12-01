@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace STG
 {
-    class GameScine : asd.Scene
+    class GameScene : asd.Scene
     {
         Player player;
 
@@ -31,7 +31,8 @@ namespace STG
         static Random rnd = new Random();
         private int randomNumber1 = rnd.Next(0, 480);
         private int randomNumber2 = rnd.Next(0,640);
-        
+
+        asd.PostEffectLightBloom lightBloom = new asd.PostEffectLightBloom();
 
         protected override void OnRegistered()
         {
@@ -42,6 +43,7 @@ namespace STG
             backgroundLayer.DrawingPriority = -10;
             AddLayer(backgroundLayer);
 
+
             asd.Layer2D layertext = new asd.Layer2D();
             layertext.DrawingPriority = +10;
             AddLayer(layertext);
@@ -50,13 +52,42 @@ namespace STG
 
             backgroundLayer.AddObject(bg);
 
+
+            // ライトブルームのぼかしの強さを設定する。
+            //lightBloom.Intensity = 100.0f;
+
+            // ライトブルームの露光の強さを設定する。
+            //lightBloom.Exposure = 3.0f;
+
+            // ライトブルームで光らせる明るさのしきい値を設定する。
+            //lightBloom.Threshold = 0.6f;
+
+            // レイヤーにライトブルームのポストエフェクトを適用。
+            //backgroundLayer.AddPostEffect(lightBloom);
+
             // 動く背景を生成する。
-            MovingBackground bgMove1 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f), "Resources/haikei0.png", 10.0f);
-            MovingBackground bgMove2 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f - bgMove1.Texture.Size.Y), "Resources/haikei1.png", 10.0f);
+            MovingBackground bgMove1 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f), "Resources/haikei20.png", 10.0f);
+            MovingBackground bgMove2 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f - bgMove1.Texture.Size.Y), "Resources/haikei21.png", 10.0f);
+            MovingBackground bgMove3 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f), "Resources/haikei20.png", 5.0f);
+            MovingBackground bgMove4 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f - bgMove1.Texture.Size.Y), "Resources/haikei21.png", 5.0f);
+            //MovingBackground bgMove5 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f), "Resources/haikei2.png", 2.0f);
+            //MovingBackground bgMove6 = new MovingBackground(new asd.Vector2DF(-2.0f, 30.0f - bgMove1.Texture.Size.Y), "Resources/haikei3.png", 2.0f);
+
+            var bgcolor = bgMove1.Color;
+            bgcolor.A = 128;
+            bgMove1.Color = bgcolor;
+
+            bgcolor = bgMove2.Color;
+            bgcolor.A = 128;
+            bgMove2.Color = bgcolor;
 
             // 動く背景を文字レイヤーに追加する。（プレイヤーなどより上に表示させたいため）
-            layertext.AddObject(bgMove1);
-            layertext.AddObject(bgMove2);
+            backgroundLayer.AddObject(bgMove1);
+            backgroundLayer.AddObject(bgMove2);
+            backgroundLayer.AddObject(bgMove3);
+            backgroundLayer.AddObject(bgMove4);
+            //backgroundLayer.AddObject(bgMove5);
+            //backgroundLayer.AddObject(bgMove6);
 
             // フォントを生成する。
             var font = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 255, 255, 255), 1, new asd.Color(255, 255, 255, 255));
@@ -165,6 +196,9 @@ namespace STG
             }
 
             count++;
+
+            //lightBloom.Intensity = 10.0f + 10.0f * Math.Abs((float)Math.Sin(count / 60.0 / 1.0));
+            //lightBloom.Exposure =  0.5f * Math.Abs( (float)Math.Sin(count / 60.0 / 1.0) );
         }
     }
 }

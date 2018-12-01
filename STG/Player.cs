@@ -11,6 +11,7 @@ namespace STG
         int count = 0;
         int retire_count = int.MaxValue;
         string bomb_tex;
+        int Pspeed = 5;
         
         //ショットの効果音
         private asd.SoundSource shotSound;
@@ -78,7 +79,7 @@ namespace STG
             //マウスの座標に向けて移動させる(ifはぶるぶる防止)
             if((posp - Position).Length > 5.0f)
             {
-                Position += moveVelocity * 5;
+                Position += moveVelocity * Pspeed;
             }
 
             if (count % 16 == 0) //元は
@@ -90,8 +91,10 @@ namespace STG
                 //asd.Engine.Sound.Play(shotSound);
             }
 
-            //左クリックでボム発動
-            if (asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push)
+
+
+            //右クリックでボム発動
+            if (asd.Engine.Mouse.RightButton.ButtonState == asd.MouseButtonState.Push)
             {
                 Singleton.Getsingleton();
 
@@ -118,13 +121,13 @@ namespace STG
                                 bomb_tex = "randoseru";
                                 break;
                             case 5:
-                                bomb_tex = "jouki";
+                                bomb_tex = "gasutou";
                                 break;
                             case 6:
-                                bomb_tex = "yukiti";
+                                bomb_tex = "jouki";
                                 break;
                             case 7:
-                                bomb_tex = "gasutou";
+                                bomb_tex = "yukiti";
                                 break;
                         }
 
@@ -141,6 +144,13 @@ namespace STG
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push && retire_count == int.MaxValue)
             {
                 retire_count = count;
+            }
+
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.S) == asd.KeyState.Push)
+            {
+                Pspeed += 2;
+                var Wasi = new Wasi_mark(this.Position);
+                asd.Engine.AddObject2D(Wasi);
             }
 
             asd.Vector2DF position = Position;

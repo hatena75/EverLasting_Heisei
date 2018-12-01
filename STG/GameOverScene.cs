@@ -50,8 +50,6 @@ namespace STG
 
             // 文字描画オブジェクトのインスタンスをエンジンへ追加する。
             layertext.AddObject(obj);
-
-
         }
 
         bool isOverChanging = false;
@@ -61,7 +59,7 @@ namespace STG
 
             if (asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push && isOverChanging == false)
             {
-                asd.Engine.ChangeSceneWithTransition(new GameScine(), new asd.TransitionFade(1.0f, 1.0f));
+                asd.Engine.ChangeSceneWithTransition(new GameScene(), new asd.TransitionFade(1.0f, 1.0f));
 
                 isOverChanging = true;
 

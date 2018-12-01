@@ -26,7 +26,7 @@ namespace STG
         {
             if(asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push && isTitleChanging == false)
             {
-                asd.Engine.ChangeSceneWithTransition(new GameScine(), new asd.TransitionFade(1.0f, 1.0f));
+                asd.Engine.ChangeSceneWithTransition(new GameScene(), new asd.TransitionFade(1.0f, 1.0f));
 
                 isTitleChanging = true;
             }

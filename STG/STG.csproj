@@ -78,7 +78,7 @@
     <Compile Include="CollidableObject.cs" />
     <Compile Include="Enemy\Enemy.cs" />
     <Compile Include="GameOverScene.cs" />
-    <Compile Include="GameScine.cs" />
+    <Compile Include="GameScene.cs" />
     <Compile Include="MovingBackground.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="PenetrateBullet.cs" />
@@ -90,6 +90,7 @@
     <Compile Include="Etc\Singleton.cs" />
     <Compile Include="SplitBullet.cs" />
     <Compile Include="TitleScene.cs" />
+    <Compile Include="Wasi_mark.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
