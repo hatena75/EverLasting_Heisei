@@ -69,7 +69,7 @@ namespace STG
                 Singleton.singleton.itemhaving = 0;
                 Singleton.singleton.itemcount = 0;
                 Singleton.singleton.bomblimit = 1;
-                Player.year = 0;
+                Player.year = 1;
                 Player.retire_flg = false;
             }
         }

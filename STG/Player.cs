@@ -71,7 +71,7 @@ namespace STG
 
             // マウスカーソルの座標を取得。
             asd.Vector2DF posp = asd.Engine.Mouse.Position;
-
+            
             //マウスカーソルの向きへの単位ベクトルを取得
             moveVelocity = (posp - Position).Normal;
 
@@ -156,6 +156,13 @@ namespace STG
             {
                 retire_flg = true;
                 Dispose();
+            }
+
+            if (retire_count != int.MaxValue && count % 12 == 0)
+            {
+                var color = this.Color;
+                color.A -= 5; //Aの初期値255
+                this.Color = color;
             }
 
             if (count % 300 == 0 && IsAlive == true) //生きているなら5秒で1年経つ

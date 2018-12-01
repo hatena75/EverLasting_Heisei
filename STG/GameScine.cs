@@ -72,7 +72,7 @@ namespace STG
 
             Singleton.Getsingleton();
             // 描画する文字列を指定する。
-            obj.Text = "平成" + Player.year + "年";
+            obj.Text = "平成元年";
 
             // フォントを生成する。
             var font2 = asd.Engine.Graphics.CreateDynamicFont("", 30, new asd.Color(255, 0, 0, 255), 0, new asd.Color(255, 0, 0, 255));
@@ -137,6 +137,7 @@ namespace STG
             //敵が湧く処理
             if (count > 50)
             {
+                
                 if (count % 40 == 0)
                 {
                     for(int i = 0; i < (Player.year / 2) + 2; i++)
