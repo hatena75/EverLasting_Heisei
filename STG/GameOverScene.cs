@@ -69,6 +69,7 @@ namespace STG
                 Singleton.singleton.bomblimit = 1;
                 Player.year = 1;
                 Player.retire_flg = false;
+                ItemController.Initialize();
             }
         }
         

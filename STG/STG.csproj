@@ -51,6 +51,8 @@
     <Compile Include="Background.cs" />
     <Compile Include="Bomb.cs" />
     <Compile Include="ChangeableBullet.cs" />
+    <Compile Include="ItemController.cs" />
+    <Compile Include="ItemDraw.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateTriShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_SpeedThreeShot.cs" />
@@ -64,6 +66,8 @@
     <Compile Include="Enemy\RushingEnemy2.cs" />
     <Compile Include="Enemy\RushingEnemy3.cs" />
     <Compile Include="Enemy\RushingEnemy4.cs" />
+    <Compile Include="ItemListMenu.cs" />
+    <Compile Include="ItemSelectFrame.cs" />
     <Compile Include="Item\Item.cs" />
     <Compile Include="Item\BarrierItem.cs" />
     <Compile Include="Item\SpeedThreeShotItem.cs" />

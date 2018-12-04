@@ -12,6 +12,7 @@ namespace STG
         int retire_count = int.MaxValue;
         string bomb_tex;
         int Pspeed = 5;
+        int item_select = -1;
         
         //ショットの効果音
         private asd.SoundSource shotSound;
@@ -82,7 +83,7 @@ namespace STG
                 Position += moveVelocity * Pspeed;
             }
 
-            if (count % 16 == 0) //元は
+            if (count % 16 == 0) //元は4
             {
                 asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(0,-25), "Tower_tokyo", true));
                 asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(5,-5), "Vote", false));
@@ -91,10 +92,46 @@ namespace STG
                 //asd.Engine.Sound.Play(shotSound);
             }
 
+            //アイテム獲得時の処理
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.A) == asd.KeyState.Push)
+            {
+                
+                if (item_select == -1)
+                {
+                    ItemController.itemselecting[0] = true;
+
+                }
+                else if(item_select == 5)
+                {
+                    //ItemController.selectchanging[5] = true;
+
+                    ItemController.itemselecting[0] = true;
+                    ItemController.itemselecting[5] = false;
+                    item_select = -1;
+                }
+                else
+                {
+                   // ItemController.selectchanging[item_select] = true;
 
 
-            //右クリックでボム発動
-            if (asd.Engine.Mouse.RightButton.ButtonState == asd.MouseButtonState.Push)
+                    ItemController.itemselecting[item_select] = false;
+                    ItemController.itemselecting[item_select+1] = true;
+                }
+
+                item_select++;
+
+            }
+
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.Z) == asd.KeyState.Push && 0 <= item_select && item_select <= 5 && ItemController.itemlist[item_select] == false)
+            {
+                ItemController.itemlist[item_select] = true; //アイテム使用
+                ItemController.itemselecting[item_select] = false;
+                //ItemController.selectchanging[item_select] = true; //枠Disposeのため一度trueにする。
+                item_select = -1;
+            }
+
+                //右クリックでボム発動
+                if (asd.Engine.Mouse.RightButton.ButtonState == asd.MouseButtonState.Push)
             {
                 Singleton.Getsingleton();
 
@@ -141,11 +178,13 @@ namespace STG
                 }
             }
 
+            //リタイア宣言
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push && retire_count == int.MaxValue)
             {
                 retire_count = count;
             }
 
+            //スピードアップ
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.S) == asd.KeyState.Push)
             {
                 Pspeed += 2;
@@ -162,12 +201,14 @@ namespace STG
 
             count++;
 
+            //リタイア成功処理
             if (retire_count + 600 == count && IsAlive == true)
             {
                 retire_flg = true;
                 Dispose();
             }
 
+            //リタイア宣言時から徐々に消えていく
             if (retire_count != int.MaxValue && count % 12 == 0)
             {
                 var color = this.Color;

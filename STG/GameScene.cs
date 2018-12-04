@@ -34,6 +34,10 @@ namespace STG
 
         asd.PostEffectLightBloom lightBloom = new asd.PostEffectLightBloom();
 
+        public asd.Layer2D layertext = new asd.Layer2D();
+        
+        
+
         protected override void OnRegistered()
         {
             gameLayer = new asd.Layer2D();
@@ -44,7 +48,7 @@ namespace STG
             AddLayer(backgroundLayer);
 
 
-            asd.Layer2D layertext = new asd.Layer2D();
+            
             layertext.DrawingPriority = +10;
             AddLayer(layertext);
 
@@ -124,6 +128,21 @@ namespace STG
             // 文字描画オブジェクトのインスタンスをエンジンへ追加する。
             layertext.AddObject(obj);
             layertext.AddObject(obj2);
+
+            var syouwa1 = new ItemListMenu(new asd.Vector2DF(30,615), "syouwa1", 0);
+            var syouwa2 = new ItemListMenu(new asd.Vector2DF(120, 615), "syouwa2", 1);
+            var taisyou1 = new ItemListMenu(new asd.Vector2DF(200, 615), "taisyou1", 2);
+            var taisyou2 = new ItemListMenu(new asd.Vector2DF(280, 615), "taisyou2", 3);
+            var meiji1 = new ItemListMenu(new asd.Vector2DF(360, 615), "meiji1", 4);
+            var meiji2 = new ItemListMenu(new asd.Vector2DF(440, 615), "meiji2", 5);
+
+            layertext.AddObject(syouwa1);
+            layertext.AddObject(syouwa2);
+            layertext.AddObject(taisyou1);
+            layertext.AddObject(taisyou2);
+            layertext.AddObject(meiji1);
+            layertext.AddObject(meiji2);
+
 
             player = new Player();
 
