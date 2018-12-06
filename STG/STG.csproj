@@ -52,7 +52,6 @@
     <Compile Include="Bomb.cs" />
     <Compile Include="ChangeableBullet.cs" />
     <Compile Include="ItemController.cs" />
-    <Compile Include="ItemDraw.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateTriShot.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_SpeedThreeShot.cs" />

@@ -10,8 +10,8 @@ namespace STG
     {
         int count = 0;
         int retire_count = int.MaxValue;
-        string bomb_tex;
-        int Pspeed = 5;
+
+        int Pspeed = 5; //移動速度
         int item_select = -1;
         
         //ショットの効果音
@@ -24,7 +24,7 @@ namespace STG
 
         public static int year = 1;
 
-        public static bool retire_flg = false;
+        public static bool retire_success = false; //リタイア成功フラグ
 
         public override void OnCollide(CollidableObject obj)
         {
@@ -46,6 +46,49 @@ namespace STG
                     enemyBullet.OnCollide(this);
                 }
             }
+        }
+
+        private void Bomb(asd.Vector2DF pos)
+        {
+            string bomb_tex = ""; //ボムの画像を保存する関数
+
+            for (int i = 0; i < 8; i++)
+            {
+                // ボムを生成
+                switch (i)
+                {
+                    case 0:
+                        bomb_tex = "zangiri";
+                        break;
+                    case 1:
+                        bomb_tex = "sukiyaki";
+                        break;
+                    case 2:
+                        bomb_tex = "sinbunsi";
+                        break;
+                    case 3:
+                        bomb_tex = "renga";
+                        break;
+                    case 4:
+                        bomb_tex = "randoseru";
+                        break;
+                    case 5:
+                        bomb_tex = "gasutou";
+                        break;
+                    case 6:
+                        bomb_tex = "jouki";
+                        break;
+                    case 7:
+                        bomb_tex = "yukiti";
+                        break;
+                }
+
+                Bomb bomb = new Bomb(pos, 360 / 8 * i, bomb_tex);
+                // ボム オブジェクトをエンジンに追加
+                asd.Engine.AddObject2D(bomb);
+            }
+            asd.Engine.Sound.Play(bombSound);
+            ItemController.itemlimit[4]++;
         }
 
         public Player()
@@ -83,99 +126,77 @@ namespace STG
                 Position += moveVelocity * Pspeed;
             }
 
-            if (count % 16 == 0) //元は4
+            if (count % 8 == 0) //元は4
             {
-                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(0,-25), "Tower_tokyo", true));
-                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f,-15.0f), new asd.Vector2DF(5,-5), "Vote", false));
-                asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(-5, -5), "Vote", false));
+
+                if(ItemController.itemlist[0] == true)
+                {
+                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(0, -25), "Tower_tokyo", true));                    
+                }
+
+                if (ItemController.itemlist[1] == true)
+                {
+                    asd.Engine.AddObject2D(new SplitBullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
+                }
+
+                if (ItemController.itemlimit[3] < 2)
+                {
+                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(-5, -5), "Vote", false));
+
+                    if (ItemController.itemlimit[3] < 1)
+                    {
+                        asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(5, -5), "Vote", false));
+
+                    }
+                }
+
+                if (ItemController.itemlist[0] != true && ItemController.itemlist[1] != true && ItemController.itemlist[3] != true)
+                {
+                    asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
+                }
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);
             }
 
-            //アイテム獲得時の処理
+            //アイテム強化物獲得時の処理
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.A) == asd.KeyState.Push)
-            {
-                
+            {               
                 if (item_select == -1)
                 {
                     ItemController.itemselecting[0] = true;
-
                 }
                 else if(item_select == 5)
                 {
-                    //ItemController.selectchanging[5] = true;
-
                     ItemController.itemselecting[0] = true;
                     ItemController.itemselecting[5] = false;
                     item_select = -1;
                 }
                 else
                 {
-                   // ItemController.selectchanging[item_select] = true;
-
-
                     ItemController.itemselecting[item_select] = false;
                     ItemController.itemselecting[item_select+1] = true;
                 }
-
                 item_select++;
-
             }
 
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.Z) == asd.KeyState.Push && 0 <= item_select && item_select <= 5 && ItemController.itemlist[item_select] == false)
             {
                 ItemController.itemlist[item_select] = true; //アイテム使用
-                ItemController.itemselecting[item_select] = false;
-                //ItemController.selectchanging[item_select] = true; //枠Disposeのため一度trueにする。
-                item_select = -1;
+                ItemController.itemselecting[item_select] = false; //枠消去
+                item_select = -1; //アイテム選択位置初期化
             }
 
-                //右クリックでボム発動
-                if (asd.Engine.Mouse.RightButton.ButtonState == asd.MouseButtonState.Push)
+            //ボム追加可能なら戻す。
+            if (ItemController.itemlist[4] == true && ItemController.itemlimit[4] > 1)
             {
-                Singleton.Getsingleton();
+                ItemController.itemlimit[4]--;
+                ItemController.itemlist[4] = false;
+            }
 
-                if (Singleton.singleton.bomblimit > 0)
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        // ボムを生成
-                        switch (i)
-                        {
-                            case 0:
-                                bomb_tex = "zangiri";
-                                break;
-                            case 1:
-                                bomb_tex = "sukiyaki";
-                                break;
-                            case 2:
-                                bomb_tex = "sinbunsi";
-                                break;
-                            case 3:
-                                bomb_tex = "renga";
-                                break;
-                            case 4:
-                                bomb_tex = "randoseru";
-                                break;
-                            case 5:
-                                bomb_tex = "gasutou";
-                                break;
-                            case 6:
-                                bomb_tex = "jouki";
-                                break;
-                            case 7:
-                                bomb_tex = "yukiti";
-                                break;
-                        }
-
-                        Bomb bomb = new Bomb(Position, 360 / 8 * i, bomb_tex);
-                        // ボム オブジェクトをエンジンに追加
-                        asd.Engine.AddObject2D(bomb);
-                    }
-                    asd.Engine.Sound.Play(bombSound);
-
-                    Singleton.singleton.bomblimit--;
-                }
+            //右クリックでボム発動
+            if (asd.Engine.Mouse.RightButton.ButtonState == asd.MouseButtonState.Push && ItemController.itemlimit[4] <= 2)
+            {
+                Bomb(Position);
             }
 
             //リタイア宣言
@@ -184,12 +205,50 @@ namespace STG
                 retire_count = count;
             }
 
+            //オプション追加処理
+            if (ItemController.itemlist[5] == true && ItemController.itemlimit[5] != 0)
+            {
+                if (ItemController.itemlimit[5] == 2)
+                {
+                    asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), this));
+                    ItemController.itemlist[5] = false;
+                    
+                }
+                else
+                {
+                    asd.Engine.AddObject2D(new Option(new asd.Vector2DF(-40.0f, 0.0f), this));
+
+                }
+
+                ItemController.itemlimit[5]--;
+            }
+
             //スピードアップ
-            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.S) == asd.KeyState.Push)
+            if (ItemController.itemlist[2] == true && ItemController.itemlimit[2] > 0)
             {
                 Pspeed += 2;
-                var Wasi = new Wasi_mark(this.Position);
+                var Wasi = new Wasi_mark(Position);
                 asd.Engine.AddObject2D(Wasi);
+
+                ItemController.itemlimit[2]--;
+                ItemController.itemlist[2] = false;
+
+                //スピードアップ追加不可能なら使用不能にする。
+                if (ItemController.itemlimit[2] <= 0)
+                {
+                    ItemController.itemlist[2] = true;
+                }
+            }
+
+            //選挙権投げ使用可能判定
+            if (ItemController.itemlist[3] == true && ItemController.itemlimit[3] > 0)
+            {
+                ItemController.itemlimit[3]--;
+                ItemController.itemlist[3] = false;
+                if (ItemController.itemlimit[3] <= 0)
+                {
+                    ItemController.itemlist[3] = true;
+                }
             }
 
             asd.Vector2DF position = Position;
@@ -204,7 +263,7 @@ namespace STG
             //リタイア成功処理
             if (retire_count + 600 == count && IsAlive == true)
             {
-                retire_flg = true;
+                retire_success = true;
                 Dispose();
             }
 
@@ -216,7 +275,7 @@ namespace STG
                 this.Color = color;
             }
 
-            if (count % 300 == 0 && IsAlive == true) //生きているなら5秒で1年経つ
+            if (count % (300 - (Pspeed - 5) * 30) == 0 && IsAlive == true) //生きているなら5秒で1年経つ
             {
                 year++;
             }

@@ -39,7 +39,7 @@ namespace STG
             Singleton.Getsingleton();
 
             // 描画する文字列を指定する。
-            if (Player.retire_flg == true)
+            if (Player.retire_success == true)
             {
                 obj.Text = "平成は" + Player.year + "年で改号された";
             }
@@ -68,7 +68,7 @@ namespace STG
                 Singleton.singleton.itemcount = 0;
                 Singleton.singleton.bomblimit = 1;
                 Player.year = 1;
-                Player.retire_flg = false;
+                Player.retire_success = false;
                 ItemController.Initialize();
             }
         }
