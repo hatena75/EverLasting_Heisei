@@ -8,7 +8,7 @@ namespace STG
 {
     public class Player : CollidableObject
     {
-        int count = 0;
+        public int count = 0;
         int retire_year = int.MaxValue;
 
         int Pspeed = 5; //移動速度

@@ -54,6 +54,7 @@ namespace STG
 
             this.pos = pos;
 
+            count = player.count + 1;
             //Radius = Texture.Size.X / 5.0f;
 
             //ショットの効果音を読み込む
@@ -66,10 +67,34 @@ namespace STG
             //線形補間の原理でもっさりとプレイヤーについていく
             Position += ((player.Position + pos) - Position) * 0.3f;
 
-            if (count % 48 == 0)
+            if (count % 16 == 0) //元は4
             {
-                asd.Engine.AddObject2D(new SplitBullet(Position + new asd.Vector2DF(0.0f, -15.0f) ));
 
+                if (ItemController.itemlist[0] == true)
+                {
+                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(0, -25), "Tower_tokyo", true));
+                }
+
+                if (ItemController.itemlist[1] == true)
+                {
+                    asd.Engine.AddObject2D(new SplitBullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
+                }
+
+                if (ItemController.itemlimit[3] < 2)
+                {
+                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(-5, -5), "Vote", false));
+
+                    if (ItemController.itemlimit[3] < 1)
+                    {
+                        asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(5, -5), "Vote", false));
+
+                    }
+                }
+
+                if (ItemController.itemlist[0] != true && ItemController.itemlist[1] != true && ItemController.itemlist[3] != true)
+                {
+                    asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
+                }
                 // ショットの効果音を再生
                 //asd.Engine.Sound.Play(shotSound);
             }

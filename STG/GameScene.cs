@@ -197,7 +197,7 @@ namespace STG
                     }
                 }
 
-                if(count % 900 == 0)
+                if(count % 90 == 0)
                 {
                     asd.Engine.AddObject2D(new ItemEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
                 }
