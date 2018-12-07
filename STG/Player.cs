@@ -9,10 +9,16 @@ namespace STG
     public class Player : CollidableObject
     {
         int count = 0;
-        int retire_count = int.MaxValue;
+        int retire_year = int.MaxValue;
 
         int Pspeed = 5; //移動速度
         int item_select = -1;
+        static bool item_get = false;
+
+        static public void Item_get()
+        {
+            item_get = true;
+        }
         
         //ショットの効果音
         private asd.SoundSource shotSound;
@@ -126,7 +132,7 @@ namespace STG
                 Position += moveVelocity * Pspeed;
             }
 
-            if (count % 8 == 0) //元は4
+            if (count % 16 == 0) //元は4
             {
 
                 if(ItemController.itemlist[0] == true)
@@ -159,7 +165,7 @@ namespace STG
             }
 
             //アイテム強化物獲得時の処理
-            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.A) == asd.KeyState.Push)
+            if (item_get == true)
             {               
                 if (item_select == -1)
                 {
@@ -177,6 +183,7 @@ namespace STG
                     ItemController.itemselecting[item_select+1] = true;
                 }
                 item_select++;
+                item_get = false;
             }
 
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.Z) == asd.KeyState.Push && 0 <= item_select && item_select <= 5 && ItemController.itemlist[item_select] == false)
@@ -200,9 +207,9 @@ namespace STG
             }
 
             //リタイア宣言
-            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push && retire_count == int.MaxValue)
+            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push && retire_year == int.MaxValue)
             {
-                retire_count = count;
+                retire_year = year;
             }
 
             //オプション追加処理
@@ -261,19 +268,21 @@ namespace STG
             count++;
 
             //リタイア成功処理
-            if (retire_count + 600 == count && IsAlive == true)
+            if (retire_year + 2 == year && IsAlive == true)
             {
                 retire_success = true;
                 Dispose();
             }
 
+            /*
             //リタイア宣言時から徐々に消えていく
-            if (retire_count != int.MaxValue && count % 12 == 0)
+            if (retire_year != int.MaxValue && count % 12 == 0)
             {
                 var color = this.Color;
                 color.A -= 5; //Aの初期値255
                 this.Color = color;
             }
+            */
 
             if (count % (300 - (Pspeed - 5) * 30) == 0 && IsAlive == true) //生きているなら5秒で1年経つ
             {

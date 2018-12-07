@@ -10,7 +10,7 @@ namespace STG.Item
     {
         public SpeedThereeShotItem(asd.Vector2DF pos) : base(pos)
         {
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Item5.png");
+            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/kurumi.png");
         }
 
         public override void OnCollide(CollidableObject obj)

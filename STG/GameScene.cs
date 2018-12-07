@@ -193,8 +193,13 @@ namespace STG
                     for(int i = 0; i < (Player.year / 2) + 2; i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
-                        asd.Engine.AddObject2D(new RushingEnemy4(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                        asd.Engine.AddObject2D(new RushingEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
                     }
+                }
+
+                if(count % 900 == 0)
+                {
+                    asd.Engine.AddObject2D(new ItemEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
                 }
             }
 

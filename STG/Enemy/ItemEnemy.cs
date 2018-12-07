@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace STG
 {
-    class RushingEnemy4 : Enemy
+    class ItemEnemy : Enemy
     {
         private asd.Vector2DF moveVelocity;
 
-        public RushingEnemy4(asd.Vector2DF pos, Player player)
+        public ItemEnemy(asd.Vector2DF pos, Player player)
             : base(pos, player)
         {
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2.0f, Texture.Size.Y / 2.0f);
             moveVelocity = new asd.Vector2DF();
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Anshi.png");
+            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Player.png");
             moveVelocity = (player.Position - Position).Normal;
         }
 
         protected override void OnUpdate()
         {
 
-            
+
 
             Position += moveVelocity * 3.0f;
 
@@ -41,20 +41,11 @@ namespace STG
         {
 
             base.OnCollide(obj);
-            
+
             Singleton.singleton.score += 20;
-          
-            if(randomNumber >= 61 & randomNumber <= 81)
-            {
-                    asd.Engine.AddObject2D(new Item.SpeedThereeShotItem(Position));
 
-            }
-            else
-            if (randomNumber >= 71 & randomNumber <= 91)
-            {
-                asd.Engine.AddObject2D(new Item.PenetrateTriShotItem(Position));
+            asd.Engine.AddObject2D(new Item2(Position));
 
-            }
         }
 
     }
