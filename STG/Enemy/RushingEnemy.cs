@@ -24,23 +24,11 @@ namespace STG
             Position += moveVelocity * 3.0f;
 
             base.OnUpdate();
-
-            //角度（度）を計算。
-            double rad = Math.Atan2(player.Position.Y - Position.Y, player.Position.X - Position.X);
-
-            double rad2 = rad * 180 / Math.PI;
-
-            //プレイヤーの向きに変える
-            //Angle = (float)rad2;
         }
 
         public override void OnCollide(CollidableObject obj)
         {
-
             base.OnCollide(obj);
-            
-            Singleton.singleton.score += 20;
-          
         }
 
     }

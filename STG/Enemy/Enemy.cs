@@ -54,8 +54,7 @@ namespace STG
         public override void OnCollide(CollidableObject obj)
         {
             asd.Engine.AddObject2D(new BreakObjectEffect(Position));
-            Singleton.Getsingleton();
-            //Singleton.singleton.score += 10;
+            
             deathseID = asd.Engine.Sound.Play(deathSound);
             randomNumber = rnd.Next(1, 700);
            

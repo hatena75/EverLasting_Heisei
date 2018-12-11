@@ -36,7 +36,7 @@ namespace STG
             // 描画位置を指定する。
             obj.Position = new asd.Vector2DF(70, 240);
 
-            Singleton.Getsingleton();
+            
 
             // 描画する文字列を指定する。
             if (Player.retire_success == true)
@@ -63,10 +63,7 @@ namespace STG
 
                 isOverChanging = true;
 
-                Singleton.singleton.score = 0;
-                Singleton.singleton.itemhaving = 0;
-                Singleton.singleton.itemcount = 0;
-                Singleton.singleton.bomblimit = 1;
+                
                 Player.year = 1;
                 Player.retire_success = false;
                 ItemController.Initialize();

@@ -1,11 +1,11 @@
 ﻿namespace STG
 {
-    class Item2 : CollidableObject
+    class Item : CollidableObject
     {
 
         protected asd.SoundSource itemGet;
 
-        public Item2(asd.Vector2DF pos)
+        public Item(asd.Vector2DF pos)
         {
             Texture = asd.Engine.Graphics.CreateTexture2D("Resources/kurumi.png");
 

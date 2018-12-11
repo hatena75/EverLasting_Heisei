@@ -52,16 +52,15 @@ namespace STG
             {
                 base.OnCollide(obj);
                 //asd.Engine.AddObject2D(new BreakObjectEffect2(Position));
-                Singleton.singleton.score += 50;
+                
 
                 if (randomNumber >= 41 & randomNumber <= 45)
                 {
-                    asd.Engine.AddObject2D(new Item.BombItem(Position));
+                    
                 }
                 else
                 if (randomNumber >= 51 & randomNumber <= 91)
                 {
-                    asd.Engine.AddObject2D(new Item.BarrierItem(Position));
 
                 }
             }

@@ -35,8 +35,6 @@ namespace STG
         asd.PostEffectLightBloom lightBloom = new asd.PostEffectLightBloom();
 
         public asd.Layer2D layertext = new asd.Layer2D();
-        
-        
 
         protected override void OnRegistered()
         {
@@ -105,7 +103,7 @@ namespace STG
             // 描画位置を指定する。
             obj.Position = new asd.Vector2DF(0.0f, 0.0f);
 
-            Singleton.Getsingleton();
+            
             // 描画する文字列を指定する。
             obj.Text = "平成元年";
 
@@ -121,7 +119,7 @@ namespace STG
             // 描画位置を指定する。
             obj2.Position = new asd.Vector2DF(130.0f, 0.0f);
 
-            Singleton.Getsingleton();
+           
 
             //obj.Scale = new asd.Vector2DF(0.7f, 0.7f);
 
@@ -129,6 +127,7 @@ namespace STG
             layertext.AddObject(obj);
             layertext.AddObject(obj2);
 
+            //アイテム欄の画像を登録
             var syouwa1 = new ItemListMenu(new asd.Vector2DF(57,615), "syouwa1", 0);
             var syouwa2 = new ItemListMenu(new asd.Vector2DF(130, 615), "syouwa2", 1);
             var taisyou1 = new ItemListMenu(new asd.Vector2DF(203, 615), "taisyou1", 2);
@@ -180,8 +179,6 @@ namespace STG
             {
                 playingBgmId = asd.Engine.Sound.Play(bgm);
                 asd.Engine.Sound.SetVolume((int)playingBgmId, 0.1f);
-                //asd.Engine.AddObject2D(new Option(new asd.Vector2DF(40.0f, 0.0f), player));
-                //asd.Engine.AddObject2D(new Option(new asd.Vector2DF(-40.0f, 0.0f), player));
             }
 
             //敵が湧く処理
