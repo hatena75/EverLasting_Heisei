@@ -52,6 +52,10 @@
     <Compile Include="Bomb.cs" />
     <Compile Include="ChangeableBullet.cs" />
     <Compile Include="Enemy\ItemEnemy.cs" />
+    <Compile Include="Enemy\NormalEnemy.cs" />
+    <Compile Include="Enemy\HighRushingEnemy.cs" />
+    <Compile Include="Enemy\CircleNemesis.cs" />
+    <Compile Include="Enemy\SniperNemesis.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemController.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect_PenetrateShot.cs" />
@@ -64,7 +68,7 @@
     <Compile Include="ItemGetEffect\ItemGetEffect_Barrier.cs" />
     <Compile Include="ItemGetEffect\ItemGetEffect.cs" />
     <Compile Include="Bullet.cs" />
-    <Compile Include="Enemy\RushingEnemy3.cs" />
+    <Compile Include="Enemy\ReturnNemesis.cs" />
     <Compile Include="Enemy\RushingEnemy.cs" />
     <Compile Include="ItemListMenu.cs" />
     <Compile Include="ItemSelectFrame.cs" />

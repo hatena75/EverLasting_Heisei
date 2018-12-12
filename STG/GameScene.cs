@@ -194,9 +194,34 @@ namespace STG
                     }
                 }
 
-                if(count % 90 == 0)
+                if(count % 900 == 0)
                 {
+                    randomNumber1 = rnd.Next(0, 480);
+
                     asd.Engine.AddObject2D(new ItemEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
+
+                }
+
+                if (count % 500 == 0)
+                {
+                    randomNumber1 = rnd.Next(0, 480);
+
+                    asd.Engine.AddObject2D(new SniperNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                }
+
+                if (count % 400 == 0)
+                {
+                    randomNumber1 = rnd.Next(0, 480);
+
+                    asd.Engine.AddObject2D(new ReturnNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+
+                }
+
+                if (count % 300 == 0)
+                {
+                    randomNumber1 = rnd.Next(0, 480);
+
+                    asd.Engine.AddObject2D(new CircleNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
                 }
             }
 

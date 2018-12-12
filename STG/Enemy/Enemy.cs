@@ -85,6 +85,8 @@ namespace STG
             foreach (var obj in Layer.Objects)
                 CollideWith((obj as CollidableObject));
 
+            DisposeFromGame();
+
             ++count;
         }
 
