@@ -5,6 +5,9 @@
 
         protected asd.SoundSource itemGet;
 
+        //再生中のBGMを扱うためのID
+        protected int itemID;
+
         public Item(asd.Vector2DF pos)
         {
             Texture = asd.Engine.Graphics.CreateTexture2D("Resources/kurumi.png");
@@ -20,7 +23,8 @@
 
         public override void OnCollide(CollidableObject obj)
         {
-            asd.Engine.Sound.Play(itemGet);
+            itemID = asd.Engine.Sound.Play(itemGet);
+            asd.Engine.Sound.SetVolume(itemID, 0.2f);
             Player.Item_get();
             Dispose();
         }

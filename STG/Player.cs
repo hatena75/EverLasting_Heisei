@@ -19,12 +19,15 @@ namespace STG
         {
             item_get = true;
         }
-        
-        //ショットの効果音
-        private asd.SoundSource shotSound;
 
         //ボムを発動したときの効果音
         private asd.SoundSource bombSound;
+
+        //アイテム適用時効果音
+        private asd.SoundSource selectSound;
+
+        //再生中のアイテム適用時効果音を扱うためのID
+        private int selectID;
 
         private asd.Vector2DF moveVelocity;
 
@@ -108,13 +111,13 @@ namespace STG
 
             Radius = Texture.Size.X / 5.0f;
 
-            //ショットの効果音を読み込む
-            shotSound = asd.Engine.Sound.CreateSoundSource("Resources/Shot.wav", true);
-
             //ボム発動の効果音を読み込む
             bombSound = asd.Engine.Sound.CreateSoundSource("Resources/Bomb.wav", true);
+
+            selectSound = asd.Engine.Sound.CreateSoundSource("Resources/select.wav", true);
+
         }
-        
+
         protected override void OnUpdate()
         {
             foreach (var obj in Layer.Objects)
@@ -160,8 +163,7 @@ namespace STG
                 {
                     asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
                 }
-                // ショットの効果音を再生
-                //asd.Engine.Sound.Play(shotSound);
+ 
             }
 
             //アイテム強化物獲得時の処理
@@ -186,11 +188,14 @@ namespace STG
                 item_get = false;
             }
 
-            if (asd.Engine.Keyboard.GetKeyState(asd.Keys.Z) == asd.KeyState.Push && 0 <= item_select && item_select <= 5 && ItemController.itemlist[item_select] == false)
+            if ((asd.Engine.Mouse.LeftButton.ButtonState == asd.MouseButtonState.Push) && 0 <= item_select && item_select <= 5 && ItemController.itemlist[item_select] == false)
             {
                 ItemController.itemlist[item_select] = true; //アイテム使用
                 ItemController.itemselecting[item_select] = false; //枠消去
                 item_select = -1; //アイテム選択位置初期化
+
+                selectID = asd.Engine.Sound.Play(selectSound);
+                asd.Engine.Sound.SetVolume(selectID, 0.4f);
             }
 
             //ボム追加可能なら戻す。

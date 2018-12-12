@@ -9,38 +9,6 @@ namespace STG
 {
     public class Enemy : CollidableObject
     {
-        static Random rnd = new Random();
-        protected int randomNumber = rnd.Next(1, 700);
-
-        protected void CollideWith(CollidableObject obj)
-        {
-            if (obj == null)
-                return;
-
-            if(obj is Bullet || obj is ChangeableBullet)
-            {
-                CollidableObject bullet = obj;
-                
-                if (IsCollide(bullet))
-                {
-                    OnCollide(bullet);
-                    bullet.OnCollide(this);
-                }
-            }
-
-            if (obj is PenetrateBullet)
-            {
-                CollidableObject bullet = obj;
-
-                if (IsCollide(bullet))
-                {
-                    OnCollide(bullet);
-                    //bullet.OnCollide(this);
-                }
-            }
-        }
-
-
         protected int count;
 
         protected Player player;
@@ -51,14 +19,36 @@ namespace STG
         //再生中のBGMを扱うためのID
         protected int deathseID;
 
+        protected void CollideWith(CollidableObject obj)
+        {
+            if (obj == null)
+                return;
+
+            if (obj is Bullet || obj is ChangeableBullet)
+            {
+                CollidableObject bullet = obj;
+
+                if (IsCollide(bullet))
+                {
+                    OnCollide(bullet);
+                    bullet.OnCollide(this);
+                }
+            }
+        }
+
         public override void OnCollide(CollidableObject obj)
         {
-            asd.Engine.AddObject2D(new BreakObjectEffect(Position));
-            
-            deathseID = asd.Engine.Sound.Play(deathSound);
-            randomNumber = rnd.Next(1, 700);
-           
-            Dispose();
+            if(IsAlive == true)
+            {
+                asd.Engine.AddObject2D(new BreakObjectEffect(Position));
+
+                deathseID = asd.Engine.Sound.Play(deathSound);
+
+                //破壊音量を下げる。
+                asd.Engine.Sound.SetVolume(deathseID, 0.1f);
+
+                Dispose();
+            }
         }
    
 
@@ -94,9 +84,6 @@ namespace STG
         {
             foreach (var obj in Layer.Objects)
                 CollideWith((obj as CollidableObject));
-
-            //破壊音量を下げる。
-            asd.Engine.Sound.SetVolume(deathseID, 0.3f);
 
             ++count;
         }

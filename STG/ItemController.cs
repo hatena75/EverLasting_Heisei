@@ -17,6 +17,8 @@ namespace STG
 
         public static int[] itemlimit = {1, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限
 
+        private static readonly int[] itemlimit_Initialize = { 1, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限の初期値を記憶
+
         public static void Initialize()
         {
             for(int i = 0; i < itemlist.Length; i++)
@@ -24,6 +26,8 @@ namespace STG
                 itemlist[i] = false;
                 itemselecting[i] = false;
             }
+
+            itemlimit = itemlimit_Initialize;
         }
     }
 }

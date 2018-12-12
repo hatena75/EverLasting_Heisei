@@ -51,18 +51,6 @@ namespace STG
             else
             {
                 base.OnCollide(obj);
-                //asd.Engine.AddObject2D(new BreakObjectEffect2(Position));
-                
-
-                if (randomNumber >= 41 & randomNumber <= 45)
-                {
-                    
-                }
-                else
-                if (randomNumber >= 51 & randomNumber <= 91)
-                {
-
-                }
             }
 
 

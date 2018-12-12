@@ -19,6 +19,8 @@ namespace STG
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2.0f, Texture.Size.Y / 2.0f);
 
             id = num;
+
         }
+      
     }
 }
