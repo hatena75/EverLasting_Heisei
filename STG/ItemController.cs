@@ -15,9 +15,9 @@ namespace STG
         /*枠の有り無しは、itemselectingによってのみ管理される。*/
         public static bool[] itemselecting = {false, false, false, false, false, false}; //アイテム欄のうち、現在どれが選ばれているか。選ばれている1つがtrue。
 
-        public static int[] itemlimit = {1, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限
+        public static int[] itemlimit = {50, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限
 
-        private static readonly int[] itemlimit_Initialize = { 1, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限の初期値を記憶
+        private static readonly int[] itemlimit_Initialize = { 50, 1, 3, 2, 3, 2 }; //アイテム使用回数の上限の初期値を記憶
 
         public static void Initialize()
         {
@@ -29,5 +29,7 @@ namespace STG
 
             itemlimit = itemlimit_Initialize;
         }
+
+
     }
 }

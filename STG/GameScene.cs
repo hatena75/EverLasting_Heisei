@@ -187,42 +187,63 @@ namespace STG
                 
                 if (count % 40 == 0)
                 {
-                    for(int i = 0; i < (Player.year / 2) + 2; i++)
+                    for(int i = 0; i < (Player.year / 4) + 1; i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new RushingEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
                     }
                 }
 
-                if(count % 900 == 0)
+                if(count % 800 == 0)
                 {
                     randomNumber1 = rnd.Next(0, 480);
-
                     asd.Engine.AddObject2D(new ItemEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                 }
 
-                if (count % 500 == 0)
+                //ここからNemesis
+                if (count % 800 == 0)
                 {
-                    randomNumber1 = rnd.Next(0, 480);
+                    for (int i = 0; i < (Player.year / 15); i++)
+                    {
+                        randomNumber1 = rnd.Next(0, 480);
+                        asd.Engine.AddObject2D(new SniperNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
-                    asd.Engine.AddObject2D(new SniperNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    }
                 }
 
-                if (count % 400 == 0)
+                if (count % 700 == 0)
                 {
-                    randomNumber1 = rnd.Next(0, 480);
+                    for (int i = 0; i < (Player.year / 10) + 1; i++)
+                    {
+                        randomNumber1 = rnd.Next(0, 480);
+                        asd.Engine.AddObject2D(new ReturnNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
-                    asd.Engine.AddObject2D(new ReturnNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    }
 
                 }
 
-                if (count % 300 == 0)
+                if (count % 600 == 0 && Player.year >= 8)
                 {
-                    randomNumber1 = rnd.Next(0, 480);
+                    
+                    for (int i = 0; i < (Player.year / 6) - 1; i++)
+                    {
+                        randomNumber1 = rnd.Next(0, 480);
+                        asd.Engine.AddObject2D(new CircleNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    }
 
-                    asd.Engine.AddObject2D(new CircleNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
                 }
+
+                if (count % 500 == 0 && Player.year >= 10)
+                {
+                    for (int i = 0; i < (Player.year / 15); i++)
+                    {
+                        randomNumber1 = rnd.Next(0, 480);
+                        asd.Engine.AddObject2D(new HomingNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                    }
+                }
+
+
             }
 
             if (asd.Engine.Keyboard.GetKeyState(asd.Keys.R) == asd.KeyState.Push)

@@ -16,10 +16,11 @@ namespace STG
         public ReturnNemesis(asd.Vector2DF pos, Player player)
             : base(pos, player)
         {
+            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/drone.png");
             CenterPosition = new asd.Vector2DF(Texture.Size.X / 2.0f, Texture.Size.Y / 2.0f);
             moveVelocity = new asd.Vector2DF();
-            Texture = asd.Engine.Graphics.CreateTexture2D("Resources/Boss2.png");
             HP = maxHP;
+            Radius = Texture.Size.Y / 2.0f;
             //破壊時の効果音を読み込む
             //deathSound = asd.Engine.Sound.CreateSoundSource("Resources/Explode2.wav", true);
         }
@@ -35,8 +36,8 @@ namespace STG
             {
                 if (count % 20 == 0)
                 {
-                    asd.Engine.AddObject2D(new NormalEnemy(new asd.Vector2DF(Position.X + 50, Position.Y + 30.0f), new asd.Vector2DF(0, 5), player));
-                    asd.Engine.AddObject2D(new NormalEnemy(new asd.Vector2DF(Position.X - 50, Position.Y + 30.0f), new asd.Vector2DF(0, 5), player));
+                    asd.Engine.AddObject2D(new NormalEnemy(new asd.Vector2DF(Position.X + 50, Position.Y + 20.0f), new asd.Vector2DF(0, 5), player));
+                    asd.Engine.AddObject2D(new NormalEnemy(new asd.Vector2DF(Position.X - 50, Position.Y + 20.0f), new asd.Vector2DF(0, 5), player));
                     asd.Engine.AddObject2D(new NormalEnemy(new asd.Vector2DF(Position.X, Position.Y + 30.0f), new asd.Vector2DF(0, 5), player));
                 }
             }

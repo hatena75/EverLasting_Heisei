@@ -138,9 +138,15 @@ namespace STG
             if (count % 16 == 0) //元は4
             {
 
-                if(ItemController.itemlist[0] == true)
+                if(ItemController.itemlist[0] == true && ItemController.itemlimit[0] > 0)
                 {
-                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(0, -25), "Tower_tokyo", true));                    
+                    asd.Engine.AddObject2D(new ChangeableBullet(Position + new asd.Vector2DF(0.0f, -15.0f), new asd.Vector2DF(0, -25), "Tower_tokyo", true));
+                    ItemController.itemlimit[0]--;
+                }
+                else if (ItemController.itemlist[0] == true && ItemController.itemlimit[0] <= 0)
+                {
+                    ItemController.itemlimit[0] = 50;
+                    ItemController.itemlist[0] = false;
                 }
 
                 if (ItemController.itemlist[1] == true)
@@ -159,7 +165,7 @@ namespace STG
                     }
                 }
 
-                if (ItemController.itemlist[0] != true && ItemController.itemlist[1] != true && ItemController.itemlist[3] != true)
+                if (ItemController.itemlist[0] != true)
                 {
                     asd.Engine.AddObject2D(new Bullet(Position + new asd.Vector2DF(0.0f, -15.0f)));
                 }
@@ -263,6 +269,7 @@ namespace STG
                 }
             }
 
+            
             asd.Vector2DF position = Position;
 
             position.X = asd.MathHelper.Clamp(position.X, asd.Engine.WindowSize.X - Texture.Size.X / 2.0f, Texture.Size.X / 2.0f);

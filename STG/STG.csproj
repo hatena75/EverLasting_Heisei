@@ -55,6 +55,8 @@
     <Compile Include="Enemy\NormalEnemy.cs" />
     <Compile Include="Enemy\HighRushingEnemy.cs" />
     <Compile Include="Enemy\CircleNemesis.cs" />
+    <Compile Include="Enemy\HomingEnemy.cs" />
+    <Compile Include="Enemy\HomingNemesis.cs" />
     <Compile Include="Enemy\SniperNemesis.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemController.cs" />
