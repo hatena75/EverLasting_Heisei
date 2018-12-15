@@ -8,7 +8,7 @@ namespace STG
 {
     class SniperNemesis : Enemy
     {
-        private const int maxHP = 5;
+        private const int maxHP = 10;
         private int HP;
 
         private asd.Vector2DF moveVelocity;

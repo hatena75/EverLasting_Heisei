@@ -18,13 +18,13 @@
 
             Position = pos;
 
-            itemGet = asd.Engine.Sound.CreateSoundSource("Resources/Itemget.wav", true);     
+            itemGet = asd.Engine.Sound.CreateSoundSource("Resources/Itemget.wav", true);
         }
 
         public override void OnCollide(CollidableObject obj)
         {
             itemID = asd.Engine.Sound.Play(itemGet);
-            asd.Engine.Sound.SetVolume(itemID, 0.2f);
+            //asd.Engine.Sound.SetVolume(itemID, 0.2f);
             Player.Item_get();
             Dispose();
         }

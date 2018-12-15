@@ -296,7 +296,7 @@ namespace STG
             }
             */
 
-            if (count % (300 - (Pspeed - 5) * 30) == 0 && IsAlive == true) //生きているなら5秒で1年経つ
+            if (count % (240 - (Pspeed - 5) * 30) == 0 && IsAlive == true) //生きているなら4秒で1年経つ
             {
                 year++;
             }

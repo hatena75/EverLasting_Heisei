@@ -8,7 +8,7 @@ namespace STG
 {
     class HomingNemesis : Enemy
     {
-        private const int maxHP = 15;
+        private const int maxHP = 20;
         private int HP;
 
         private asd.Vector2DF moveVelocity;
@@ -34,14 +34,14 @@ namespace STG
             }
             else if (count < 480)
             {
-                if (count % 200 == 0)
+                if (count % 150 == 0)
                 {
                     asd.Engine.AddObject2D(new HomingEnemy(Position, player));
                 }
             }
             else
             {
-                moveVelocity = new asd.Vector2DF(0, -(count - 480) );
+                moveVelocity = new asd.Vector2DF(0, count - 480);
                 Position += moveVelocity * 0.05f;
             }
             

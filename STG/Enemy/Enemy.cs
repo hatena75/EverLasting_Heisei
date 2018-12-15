@@ -45,7 +45,7 @@ namespace STG
                 deathseID = asd.Engine.Sound.Play(deathSound);
 
                 //破壊音量を下げる。
-                asd.Engine.Sound.SetVolume(deathseID, 0.05f);
+                //asd.Engine.Sound.SetVolume(deathseID, 0.05f);
 
                 Dispose();
             }

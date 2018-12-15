@@ -185,26 +185,38 @@ namespace STG
             if (count > 50)
             {
                 
-                if (count % 40 == 0)
+                if (count % 60 == 0)
                 {
-                    for(int i = 0; i < (Player.year / 4) + 1; i++)
+                    for(int i = 0; i < (Player.year / 8) + 2; i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new RushingEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
                     }
                 }
 
-                if(count % 800 == 0)
+                if(count % 600 == 0)
                 {
                     randomNumber1 = rnd.Next(0, 480);
                     asd.Engine.AddObject2D(new ItemEnemy(new asd.Vector2DF(randomNumber1, 0.0f), player));
 
                 }
 
-                //ここからNemesis
-                if (count % 800 == 0)
+                if (count % 240 == 0 && Player.year == 14)
                 {
-                    for (int i = 0; i < (Player.year / 15); i++)
+                    randomNumber1 = rnd.Next(0, 480);
+                    asd.Engine.AddObject2D(new CircleNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                }
+
+                if (count % 240 == 0 && Player.year == 17)
+                {
+                    randomNumber1 = rnd.Next(0, 480);
+                    asd.Engine.AddObject2D(new HomingNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
+                }
+
+                //ここからNemesis
+                if (count % 1000 == 0)
+                {
+                    for (int i = 0; i < (Player.year / 21); i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new SniperNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
@@ -212,9 +224,9 @@ namespace STG
                     }
                 }
 
-                if (count % 700 == 0)
+                if (count % 600 == 0 && Player.year != 13 && Player.year != 17 && Player.year != 21 && Player.year != 22)
                 {
-                    for (int i = 0; i < (Player.year / 10) + 1; i++)
+                    for (int i = 0; i < (Player.year / 15) + 1; i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new ReturnNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
@@ -223,10 +235,10 @@ namespace STG
 
                 }
 
-                if (count % 600 == 0 && Player.year >= 8)
+                if (count % 800 == 0 && Player.year != 17 && Player.year != 21 && Player.year != 22)
                 {
                     
-                    for (int i = 0; i < (Player.year / 6) - 1; i++)
+                    for (int i = 0; i < (Player.year / 15); i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new CircleNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));
@@ -234,9 +246,9 @@ namespace STG
 
                 }
 
-                if (count % 500 == 0 && Player.year >= 10)
+                if (count % 500 == 0 && Player.year != 20 && Player.year != 21 && Player.year != 22)
                 {
-                    for (int i = 0; i < (Player.year / 15); i++)
+                    for (int i = 0; i < (Player.year / 18); i++)
                     {
                         randomNumber1 = rnd.Next(0, 480);
                         asd.Engine.AddObject2D(new HomingNemesis(new asd.Vector2DF(randomNumber1, 0.0f), player));

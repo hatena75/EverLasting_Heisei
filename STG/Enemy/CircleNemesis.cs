@@ -8,7 +8,7 @@ namespace STG
 {
     class CircleNemesis : Enemy
     {
-        private const int maxHP = 10;
+        private const int maxHP = 15;
         private int HP;
 
         private asd.Vector2DF moveVelocity;
@@ -50,7 +50,7 @@ namespace STG
             }
             else
             {
-                moveVelocity = new asd.Vector2DF(0, -(count - 260) );
+                moveVelocity = new asd.Vector2DF(0, count - 260 );
                 Position += moveVelocity * 0.1f;
             }
             
