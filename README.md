@@ -1,1 +1,4 @@
 EverLasting_Heisei
+
+EverLasting_Heiseiは2018年冬のコミックマーケットに
+AmusementCreatorsのゲームの1つとして提出したゲームです。
